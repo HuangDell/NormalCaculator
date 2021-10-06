@@ -320,7 +320,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QPushButton" name="button_per">
+       <widget class="QPushButton" name="button_sqrt">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -328,7 +328,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>%</string>
+         <string>⎷x</string>
         </property>
        </widget>
       </item>

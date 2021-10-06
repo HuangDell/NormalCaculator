@@ -103,7 +103,10 @@ double tools::calculate(QString equ)
             auto num1=st.top();
             st.pop();
             if(ch=='!')
+            {
                 st.push(most(num1));
+                continue;
+            }
             else
             {
                 CHECK;
@@ -127,6 +130,5 @@ double tools::calculate(QString equ)
             st.push(ans);
         }
     }
-    return ans;
-
+    return st.top();
 }

@@ -110,11 +110,14 @@ void Main::initButton()
     //链接按钮Back
     connect(ui->button_back,&QAbstractButton::clicked,this,[this](){
         SETCURSOREND;
+        ISCAL;
         if(ui->view->toPlainText()!="0" && ui->view->toPlainText().size()!=1)
         {
             auto text=ui->view->toPlainText().toStdString();
             ui->view->setText(QString::fromStdString(text.substr(0,text.size()-1)));
         }
+        else
+            ui->view->setText("0");
     });
     //链接按钮add
     connect(ui->button_add,&QAbstractButton::clicked,this,[this](){
@@ -157,8 +160,8 @@ void Main::initButton()
     });
     //链接按钮(
     connect(ui->button_left,&QAbstractButton::clicked,this,[this](){
+        ISCAL;
         SETCURSOREND;
-        CAL_CLEAR;
         auto st=ui->view->toPlainText();
         if(st[st.size()-1].isDigit())
             ui->view->insertPlainText("*(");
@@ -167,26 +170,31 @@ void Main::initButton()
     });
     //链接按钮)
     connect(ui->button_right,&QAbstractButton::clicked,this,[this](){
+        ISCAL;
         SETCURSOREND;
-        CAL_CLEAR;
         if(ui->view->toPlainText()!="0")
             ui->view->insertPlainText(")");
     });
     //链接按钮乘方
     connect(ui->button_squa,&QAbstractButton::clicked,this,[this](){
+        ISCAL;
         SETCURSOREND;
-        CAL_CLEAR;
         ui->view->insertPlainText("^");
     });
     //链接按钮阶乘
     connect(ui->button_most,&QAbstractButton::clicked,this,[this](){
+        ISCAL;
         SETCURSOREND;
-        CAL_CLEAR;
         ui->view->insertPlainText("!");
     });
     //链接按钮clear
     connect(ui->button_clear,&QAbstractButton::clicked,this,[this](){
         ui->view->setText("0");
+    });
+    connect(ui->button_sqrt,&QAbstractButton::clicked,this,[this](){
+        ISCAL;
+        SETCURSOREND;
+        ui->view->insertPlainText("^(1/2)");
     });
 }
 Main::~Main()
