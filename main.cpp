@@ -191,11 +191,19 @@ void Main::initButton()
     connect(ui->button_clear,&QAbstractButton::clicked,this,[this](){
         ui->view->setText("0");
     });
+    //链接按钮开方
     connect(ui->button_sqrt,&QAbstractButton::clicked,this,[this](){
         ISCAL;
         SETCURSOREND;
         ui->view->insertPlainText("^(1/2)");
     });
+    //链接按钮dot
+    connect(ui->button_dot,&QAbstractButton::clicked,this,[this](){
+        ISCAL;
+        SETCURSOREND;
+        ui->view->insertPlainText(".");
+    });
+
 }
 Main::~Main()
 {

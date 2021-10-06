@@ -2,14 +2,14 @@
 using std::stack;
 using std::vector;
 tools::tools(){}
-double tools::most(int num)
+double tools::most(int num)//jiu's
 {
     double ans=1;
     for(int i=1;i<=num;i++)
         ans*=i;
     return ans;
 }
-int tools::getPriority(QChar ch)
+int tools::getPriority(QChar ch)//定义符号的优先级
 {
     switch(ch.toLatin1()){
         case '+':return 1;
@@ -22,14 +22,14 @@ int tools::getPriority(QChar ch)
     return 0;
 }
 
-vector<QString> tools::toCalable(QString equ)
+vector<QString> tools::toCalable(QString equ)//将表达式转化为逆波兰表达式
 {
     stack<QString> ans;
     stack<QString> temp;
     QString digit;
     for(auto ch:equ)
     {
-        if(ch.isDigit())
+        if(ch.isDigit()||ch=='.')//添加小数计算
         {
             digit.push_back(ch);
             continue;
@@ -84,7 +84,7 @@ vector<QString> tools::toCalable(QString equ)
 }
 
 
-double tools::calculate(QString equ)
+double tools::calculate(QString equ)//计算逆波兰表达式
 {
     bool is;
     double ans=0;
