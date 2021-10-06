@@ -1,7 +1,5 @@
 #include "main.h"
 #include "ui_main.h"
-using std::ifstream;
-using std::string;
 Main::Main(QWidget *parent)
     : QMainWindow(parent),isCal(false),ans("0"), ui(new Ui::Main)
 {
@@ -14,7 +12,7 @@ Main::Main(QWidget *parent)
 
 
 
-void Main::initMenuBar()
+void Main::initMenuBar() //初始化菜单栏
 {
     connect(ui->author,&QAction::triggered,this,[this](){
         QFile file("./README.md");
@@ -29,7 +27,7 @@ void Main::initMenuBar()
     });
 }
 
-void Main::initButton()
+void Main::initButton()//初始化按钮
 {
     //链接按钮0
     connect(ui->button_0,&QAbstractButton::clicked,this,[this](){
@@ -129,7 +127,7 @@ void Main::initButton()
             auto text=ui->view->toPlainText().toStdString();
             ui->view->setText(QString::fromStdString(text.substr(0,text.size()-1)));
         }
-        else
+        else //全部清空之后就自动显示为0
             ui->view->setText("0");
     });
     //链接按钮add
@@ -160,11 +158,12 @@ void Main::initButton()
     connect(ui->button_equ,&QAbstractButton::clicked,this,[this](){
         SETCURSOREND;
         isCal=true;
+        ui->show->clear(); //清理逆波兰表达式显示器
         auto equ=ui->view->toPlainText();
         ui->view->insertPlainText("=");
         auto res=tools::calculate(equ);
         if(res.first==INT_MAX)
-            ui->view->setText("Error!");
+            ui->view->setText("Error!"); //判段错误信号并返回
         else
         {
             ans=QString::number(res.first);
@@ -183,8 +182,8 @@ void Main::initButton()
             ui->view->setText("(");
             return;
         }
-        if(st[st.size()-1].isDigit())
-            ui->view->insertPlainText("*(");
+        if(st[st.size()-1].isDigit() || st[st.size()-1]==')')
+            ui->view->insertPlainText("*("); //自动添加乘号
         else
             ui->view->insertPlainText("(");
     });

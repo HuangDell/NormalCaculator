@@ -3,6 +3,7 @@
 #define CHECK \
 if(st.empty())\
     return std::make_pair(INT_MAX,std::vector<QString>());
+//检测是否非法输入
 #include <QString>
 #include <stack>
 #include <vector>
