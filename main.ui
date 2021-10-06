@@ -406,7 +406,6 @@
      <string>关于</string>
     </property>
     <addaction name="author"/>
-    <addaction name="version"/>
    </widget>
    <addaction name="menu"/>
   </widget>

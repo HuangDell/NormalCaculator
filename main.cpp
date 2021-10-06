@@ -1,7 +1,7 @@
 #include "main.h"
-
 #include "ui_main.h"
-
+using std::ifstream;
+using std::string;
 Main::Main(QWidget *parent)
     : QMainWindow(parent),isCal(false),ans("0"), ui(new Ui::Main)
 {
@@ -9,12 +9,24 @@ Main::Main(QWidget *parent)
     ui->view->setText("0");
     setWindowTitle("计算器");
     initButton();
+    initMenuBar();
 }
 
 
 
 void Main::initMenuBar()
 {
+    connect(ui->author,&QAction::triggered,this,[this](){
+        QFile file("./README.md");
+        QMessageBox box(this);
+        box.setWindowTitle("作者");
+        if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+            return;
+        auto txt=file.readAll();
+        box.setText(QString(txt));
+        box.setTextFormat(Qt::MarkdownText);
+        box.exec();
+    });
 }
 
 void Main::initButton()
@@ -166,6 +178,11 @@ void Main::initButton()
         ISCAL;
         SETCURSOREND;
         auto st=ui->view->toPlainText();
+        if(st=="0")
+        {
+            ui->view->setText("(");
+            return;
+        }
         if(st[st.size()-1].isDigit())
             ui->view->insertPlainText("*(");
         else

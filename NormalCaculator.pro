@@ -11,8 +11,7 @@ CONFIG += c++11
 SOURCES += \
     caculator.cpp \
     main.cpp \
-    main.cpp \
-    tools.cpp
+    tools.cpp \
 
 HEADERS += \
     main.h \

@@ -18,6 +18,10 @@ isCal=false;
 
 #include <QDebug>
 #include <QMainWindow>
+#include <QMessageBox>
+#include <fstream>
+#include <string>
+#include <QFile>
 #include "tools.h"
 
 QT_BEGIN_NAMESPACE
