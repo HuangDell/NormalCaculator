@@ -111,6 +111,7 @@ void Main::initButton()
     connect(ui->button_back,&QAbstractButton::clicked,this,[this](){
         SETCURSOREND;
         ISCAL;
+        ui->show->clear();
         if(ui->view->toPlainText()!="0" && ui->view->toPlainText().size()!=1)
         {
             auto text=ui->view->toPlainText().toStdString();
@@ -149,13 +150,15 @@ void Main::initButton()
         isCal=true;
         auto equ=ui->view->toPlainText();
         ui->view->insertPlainText("=");
-        auto num=tools::calculate(equ);
-        if(num==INT_MAX)
+        auto res=tools::calculate(equ);
+        if(res.first==INT_MAX)
             ui->view->setText("Error!");
         else
         {
-            ans=QString::number(num);
+            ans=QString::number(res.first);
             ui->view->insertPlainText(ans);
+            for(auto st:res.second)
+                ui->show->insertPlainText(st);
         }
     });
     //链接按钮(
@@ -190,6 +193,7 @@ void Main::initButton()
     //链接按钮clear
     connect(ui->button_clear,&QAbstractButton::clicked,this,[this](){
         ui->view->setText("0");
+        ui->show->clear();
     });
     //链接按钮开方
     connect(ui->button_sqrt,&QAbstractButton::clicked,this,[this](){

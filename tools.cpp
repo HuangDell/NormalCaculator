@@ -1,5 +1,6 @@
 #include "tools.h"
 using std::stack;
+using std::pair;
 using std::vector;
 tools::tools(){}
 double tools::most(int num)//jiu's
@@ -84,7 +85,7 @@ vector<QString> tools::toCalable(QString equ)//将表达式转化为逆波兰表
 }
 
 
-double tools::calculate(QString equ)//计算逆波兰表达式
+std::pair<double,std::vector<QString>> tools::calculate(QString equ)//计算逆波兰表达式
 {
     bool is;
     double ans=0;
@@ -120,8 +121,8 @@ double tools::calculate(QString equ)//计算逆波兰表达式
                     ans=num1*num2;
                 else if(ch=='/')
                 {
-                    if(num2==0)
-                        return INT_MAX;
+            if(num2==0)
+                return std::make_pair(INT_MAX,std::vector<QString>());
                     ans=num2/num1;
                 }
                 else if(ch=='^')
@@ -130,5 +131,5 @@ double tools::calculate(QString equ)//计算逆波兰表达式
             st.push(ans);
         }
     }
-    return st.top();
+    return std::make_pair(st.top(),cal);
 }
